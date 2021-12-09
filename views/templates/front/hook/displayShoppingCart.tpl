@@ -22,6 +22,14 @@
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-{if $toSpend > 0}
-   <h2 class='h4 p-1'>{l s='Spend another' mod='dsfreeshippingfrom'} {Tools::displayPrice($toSpend)} {l s='to get free shipping for your order!' mod='dsfreeshippingfrom'}</h2>
-{/if}
+<div id='toSpend'>
+   {nocache}
+   {if $toSpend > 0}
+      <h2 class='h4 p-1' id='toSpendHeading'>{l s='Spend another' mod='dsfreeshippingfrom'} <span id='toSpendAmount'>{$toSpend}</span> {l s='to get free shipping for your order!' mod='dsfreeshippingfrom'}
+      </h2>
+   {/if}
+   {/nocache}
+   <script>
+      var url= '{url entity='module' name='dsfreeshippingfrom' controller='Tospend' params = [action => 'ToSpendAction']}';
+   </script>
+</div>
