@@ -215,7 +215,8 @@ class Dsfreeshippingfrom extends Module
     public function hookHeader()
     {
         $this->context->controller->addJS($this->_path.'/views/js/front.js');
-        $this->context->controller->addCSS($this->_path.'/views/css/front.css');
+        // $this->context->controller->addCSS($this->_path.'/views/css/front.css'); 
+        $this->context->controller->registerJavascript(1, $this->_path.'/views/js/front.js');    
     }
 
     public function hookDisplayShoppingCart()
@@ -225,6 +226,7 @@ class Dsfreeshippingfrom extends Module
         $free_shipping = Configuration::get('PS_SHIPPING_FREE_PRICE');
         $free_shipping_price = Tools::convertPrice($free_shipping);
         $toSpend = $free_shipping_price - $cartTotal;
+        $toSpend = Tools::displayPrice($toSpend);
 
         $this->context->smarty->assign('toSpend', $toSpend);
         
