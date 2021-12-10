@@ -27,6 +27,8 @@
    {if $toSpend > 0}
       <h2 class='h4 p-1' id='toSpendHeading'>{l s='Spend another' mod='dsfreeshippingfrom'} <span id='toSpendAmount'>{$toSpend}</span> {l s='to get free shipping for your order!' mod='dsfreeshippingfrom'}
       </h2>
+   {else}
+      <h2 class='h4 p-1' id='freeShipping'>{l s='Free shipping!' mod='dsfreeshippingfrom'}</h2>
    {/if}
    {/nocache}
    <script>

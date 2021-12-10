@@ -64,7 +64,7 @@ prestashop.on(
             cache: false,
             processData: false,
             success: function(data) {
-                $('span#toSpendAmount').html(data);
+                $('#toSpend').replaceWith(data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 console.log(xhr.status);
