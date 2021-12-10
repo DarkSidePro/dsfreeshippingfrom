@@ -24,8 +24,19 @@ class DsfreeshippingfromTospendModuleFrontController extends ModuleFrontControll
 
     public function initContent()
     {
-        $this->ajax = true;
+        $this->ajax = false;
         parent::initContent();
+
+        $cart = $this->context->cart;
+        $cartTotal = $cart->getOrderTotal(false, Cart::BOTH_WITHOUT_SHIPPING);
+        $free_shipping = Configuration::get('PS_SHIPPING_FREE_PRICE');
+        $free_shipping_price = Tools::convertPrice($free_shipping);
+        $toSpend = $free_shipping_price - $cartTotal;
+        $toSpend = Tools::displayPrice($toSpend);
+
+        $this->context->smarty->assign('toSpend', $toSpend);
+        
+        return $this->setTemplate('module:'.$this->module->name.'/views/templates/front/hook/displayShoppingCart.tpl');
     }
 
     public function postProcess()
@@ -34,14 +45,6 @@ class DsfreeshippingfromTospendModuleFrontController extends ModuleFrontControll
 
     public function displayAjaxToSpendAction()
     {
-        $cart = $this->context->cart;
-        $cartTotal = $cart->getOrderTotal(false, Cart::BOTH_WITHOUT_SHIPPING);
-        $free_shipping = Configuration::get('PS_SHIPPING_FREE_PRICE');
-        $free_shipping_price = Tools::convertPrice($free_shipping);
-        $toSpend = $free_shipping_price - $cartTotal;
-        $toSpend = Tools::displayPrice($toSpend);
-
-        echo $toSpend;
-        die();
+        
     }
 }
